@@ -1,0 +1,56 @@
+.item {
+  width: 6.875rem;
+  height: 8.8125rem;
+  flex-shrink: 0;
+  border-radius: 0.8125rem;
+  background: #313c4a;
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  align-items: center;
+  /* align-items: center; */
+  /* padding-left: 0.5rem; */
+}
+.sliderContainer {
+  width: 22.5rem;
+  /* height: 9.95225rem; */
+  padding: 0.57rem;
+  flex-shrink: 0;
+  /* gap: 0.5rem; */
+  /* display: flex; */
+  border-radius: 1.0625rem;
+  background: #202833;
+
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* margin-left: 0.5rem; */
+}
+
+.chance_percent {
+  width: 3.1875rem;
+  color: #b5b5b5;
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 0.38rem;
+}
+.emoji {
+  margin-top: 0.7rem;
+  font-size: 2.5rem;
+}
+.cont_price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5rem;
+
+  width: 3.6875rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  border-radius: 1.09375rem;
+  background: #212b36;
+}

@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+@font-face {
+  font-family: "GeistMono";
+  src: url("./fonts/GeistMono-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "GeistMono";
+  src: url("./fonts/GeistMono-regular.ttf") format("truetype");
+  font-weight: 400;
+}
+.open-sans-hight {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 400;
+}
+.open-sans-light {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 400;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+
+  font-family: "GeistMono";
+}
+html {
+  font-size: calc(100vw / 398 * 16);
+  /* font-size: 16px; */
+}
+
+body {
+  background: linear-gradient(164deg, #2a3d52 10.25%, #1c2938 99.03%);
+  background-repeat: no-repeat;
+  background-size: cover;
+}

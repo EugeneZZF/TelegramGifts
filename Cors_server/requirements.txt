@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlalchemy
+asyncpg
+httpx
+pydantic
+databases
+aiosqlite
+aiogram

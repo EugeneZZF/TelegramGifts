@@ -1,0 +1,96 @@
+.layout {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 2; /* Приоритет Layout */
+  background: transparent;
+}
+
+header {
+  padding-top: 1.75rem;
+  padding-bottom: 2.8rem;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-around; */
+  background: transparent;
+  justify-content: space-between;
+
+  color: #fff;
+  text-align: center;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  width: 22.44rem;
+  margin-left: 1.13rem;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  font-family: "Open Sans";
+  margin-left: -2rem;
+}
+.title h1 {
+  font-size: 1.375rem; /* 22px */
+}
+.title p {
+  font-size: 1rem; /* 16px */
+  font-weight: normal;
+}
+.settings_btn {
+  width: 1.625rem;
+  height: 1.625rem;
+  flex-shrink: 0;
+}
+.close_btn {
+  color: #57b4f8;
+  font-family: "Open Sans";
+  font-size: 1rem; /* 16px */
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+footer {
+  /* width: 24.5625rem; */
+  width: 100%;
+  height: 5.1875rem;
+  flex-shrink: 0;
+  padding-top: 1.75rem; /* 28px */
+
+  /* color: white; */
+  background: #fff;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 4;
+  bottom: 0; /* Закрепляем футер внизу */
+  gap: 4.44rem;
+}
+.children_cont {
+  padding-bottom: 1rem;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
+  color: #d8d8d8;
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.children_cont.active {
+  color: #3390ec;
+}
+.children_cont img {
+  width: 2.43rem;
+}

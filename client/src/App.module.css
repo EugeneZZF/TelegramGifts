@@ -10,7 +10,7 @@
   /* width: 100vw; */
   /* background-color: #282c34; */
   color: white;
-  overflow: hidden;
+  overflow-x: hidden;
   position: relative;
 }
 .sliderContainer {

@@ -1,0 +1,151 @@
+.myProfile {
+  margin-top: 2rem;
+  justify-self: center;
+  /* align-self: center; */
+  width: 22.5rem;
+  height: 20rem;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+
+  flex-direction: column;
+  text-align: center;
+}
+.profile_cnt {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+  text-align: center;
+  font-family: "Tilda Sans";
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.profile_cnt h1 {
+  color: #fff;
+  text-align: center;
+  font-family: "Tilda Sans";
+  font-size: 1.5625rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.star_cnt img {
+  width: 0.9375rem;
+  height: 0.875rem;
+  flex-shrink: 0;
+}
+.avatar_cnt {
+  margin-bottom: 0.62rem;
+  width: 6.375rem;
+  height: 6.375rem;
+  flex-shrink: 0;
+  aspect-ratio: 1/1;
+  border-radius: 31.25rem;
+  border: 3px solid #fff;
+  background-size: cover !important; /* Покроет весь блок картинкой */
+
+  background: center center no-repeat;
+}
+.historyEmpty_cnt {
+  margin-top: 5.5rem;
+  width: 22.5rem;
+  height: 11.3125rem;
+  flex-shrink: 0;
+  border-radius: 1.0625rem;
+  background: #202833;
+  position: relative;
+
+  color: #fff;
+  text-align: center;
+  font-family: "Tilda Sans";
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.historyEmpty_cnt p {
+  margin-top: 7.06rem;
+}
+.historyEmpty_cnt img {
+  position: absolute;
+  width: 8.75rem;
+  height: 8.75rem;
+  flex-shrink: 0;
+  aspect-ratio: 1/1;
+  top: 0;
+  left: 0;
+  margin-left: 6.88rem;
+  margin-top: -2.81rem;
+}
+
+.history_cnt {
+  display: flex;
+  flex-direction: column;
+  gap: 0.81rem;
+  width: 20rem;
+  margin-top: 2.13rem;
+}
+
+.history_item {
+  width: 20rem;
+  height: 5.25rem;
+  flex-shrink: 0;
+  border-radius: 1.0625rem;
+  background: #202833;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 1.1rem;
+  padding-right: 0.5rem;
+}
+
+.left_item_side_stars_cont {
+  display: flex;
+  align-items: center;
+}
+.left_item_side_stars_cont p {
+  color: #fff;
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 1.5625rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.left_item_side_stars_cont img {
+  width: 1.375rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.right_item_side_button {
+  all: unset;
+  cursor: pointer;
+  width: 4.625rem;
+  height: 2rem;
+  flex-shrink: 0;
+  border-radius: 1.09375rem;
+  background: #374656;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.13rem;
+  color: #fff;
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.right_item_side_button_cont {
+  display: flex;
+  align-items: center;
+  font-size: 3.375rem;
+}

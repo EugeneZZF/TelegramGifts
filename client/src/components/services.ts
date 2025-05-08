@@ -1,5 +1,4 @@
 import axios from "axios";
-import { param } from "framer-motion/client";
 
 export const URL = "http://127.0.0.1:8000";
 // export const URL = "https://b280-91-246-41-75.ngrok-free.app";
@@ -134,6 +133,17 @@ export function getFake_prizes(category: number) {
   }
 }
 
+export type TelegramUser = {
+  allowsWriteToPm?: boolean;
+  firstName: string;
+  id: number;
+  isPremium?: boolean;
+  languageCode?: string;
+  lastName?: string;
+  photoUrl?: string;
+  username?: string;
+};
+
 export type Prize = {
   name: string;
   chance_percent: number;
@@ -167,9 +177,7 @@ export async function getPrizes(
   }
 }
 
-export async function getUsers(
-  category: number
-): Promise<
+export async function getUsers(category: number): Promise<
   {
     telegram_name: string;
     spins: number;
@@ -187,17 +195,34 @@ export async function getUsers(
 }
 
 export async function Spin(
-  category: number
-): Promise<{ name: string; chance_percent: number }[]> {
+  category: number,
+  telegramNickname: string
+): Promise<{ name: string; chance_percent: number }[] | number> {
   try {
     const response = await axios.post(`${URL}/spin`, {
-      telegram_name: "User",
+      telegram_name: telegramNickname,
       category: category,
     });
-    console.log("Spin response:", response.data);
     return response.data;
   } catch (error) {
-    console.error("Error spinning:", error);
+    return 400;
+  }
+}
+
+export async function getHistory(telegram_name: string): Promise<
+  {
+    category: number;
+    prize: string;
+    is_jackpot: boolean;
+    price: 50;
+    emoji: string;
+  }[]
+> {
+  try {
+    const response = await axios.get(`${URL}/spin-history/${telegram_name}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching prizes:", error);
     return [];
   }
 }

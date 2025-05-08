@@ -1,7 +1,8 @@
 .leaderboard_cnt {
   width: 22.31rem;
-  background: #0000002f;
+  /* background: #0000002f; */
   justify-self: center;
+  margin-top: 2rem;
 }
 .container_switcher {
   width: 4.8125rem;

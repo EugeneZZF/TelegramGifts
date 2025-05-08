@@ -15,7 +15,7 @@ export default function Layout({
   console.log("Children:", children);
   return (
     <div className={styles.layout}>
-      <header>
+      {/* <header>
         <div className={styles.close_btn}>Закрыть</div>
         <div className={styles.title}>
           <h1>Application</h1>
@@ -25,7 +25,7 @@ export default function Layout({
           className={styles.settings_btn}
           src="images/settings_btn.svg"
         ></img>
-      </header>
+      </header> */}
       <main>{children}</main>
       <footer>
         <div

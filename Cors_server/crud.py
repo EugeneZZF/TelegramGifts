@@ -6,6 +6,15 @@ from sqlalchemy import desc
 from models import User, SpinHistory
 from config import prizes, RANDOM_ORG_API_KEY
 import httpx
+from typing import Optional
+from fastapi import HTTPException
+
+
+def get_prize_price(prize_name: str, category: int) -> Optional[int]:
+    for prize in prizes.get(category, []):
+        if prize["name"] == prize_name:
+            return prize["price"]
+    return None
 
 async def get_random_number():
     async with httpx.AsyncClient() as client:
@@ -39,6 +48,11 @@ async def get_or_create_user(db: AsyncSession, telegram_name: str):
     return user
 
 async def perform_spin(db: AsyncSession, user: User, category: int):
+
+    if user.sparks < category:
+        raise HTTPException(status_code=400, detail="Недостаточно искр")
+    user.sparks -=category
+
     random_value = await get_random_number()
 
     prize_list = prizes[category]
@@ -73,7 +87,8 @@ async def perform_spin(db: AsyncSession, user: User, category: int):
         user_id=user.id,
         category=category,
         prize=selected_prize["name"],
-        is_jackpot=selected_prize["is_jackpot"]
+        is_jackpot=selected_prize["is_jackpot"],
+        emoji = selected_prize["emoji"]
     )
     db.add(spin)
 
@@ -120,7 +135,22 @@ async def get_prizes(category: int):
         {
             "name": prize["name"],
             "chance_percent": round(prize["chance"], 3),
-            "price": prize["price"]
+            "price": prize["price"],
+            "emoji": prize["emoji"]
         }
         for prize in prize_list
     ]
+
+
+
+
+
+# чисто тестовое
+async def add_sparks(db: AsyncSession, telegram_name: str, amount: int) -> int:
+    result = await db.execute(select(User).where(User.telegram_name == telegram_name))
+    user = result.scalars().first()
+    if not user:
+        raise ValueError("User not found")
+    user.sparks += amount
+    await db.commit()
+    return user.sparks

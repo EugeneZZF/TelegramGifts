@@ -9,14 +9,21 @@ import Layout from "./components/Layout/Layout";
 import MainPage from "./components/MainPage/MainPage";
 import LeaderBoard from "./components/LeaderBoard/LeaderBoard";
 import MyProfile from "./components/MyProfile/MyProfile";
+import { useInitData } from "@tma.js/sdk-react";
+// import { useSDK } from "@tma.js/sdk-react";
+import { TelegramUser } from "./components/services";
 
 function App() {
+  // const initData = useInitData(); // Данные пользователя и сессии
+
+  const user = useInitData()?.user as TelegramUser;
+
   const [category, setCategory] = useState(25);
   const [languageStatus, setLanguageStatus] = useState(true);
+  console.log(user);
 
   const handleCategoryChange = (newCategory: number) => {
     setCategory(newCategory);
-    console.log("Selected category:", newCategory);
   };
   const [currentScreen, setCurrentScreen] = useState(0);
 
@@ -38,10 +45,11 @@ function App() {
         <MainPage
           category={category}
           handleCategoryChange={handleCategoryChange}
+          user={user}
         />
       ),
     },
-    { id: 2, component: <MyProfile /> },
+    { id: 2, component: <MyProfile user={user} /> },
   ];
 
   function handleSetCurrentScreen(currentScreen: number) {

@@ -22,6 +22,7 @@ const LeaderBoard: React.FC<Props> = ({
   async function handleUsersList(category: number) {
     const users = await getUsers(category);
     console.log(users);
+
     const formattedUsers = users
       .map((user) => ({
         telegram_name: user.telegram_name,
@@ -125,7 +126,7 @@ const LeaderBoard: React.FC<Props> = ({
           ? usersList.map((user, index) => (
               <div className={styles.leader} key={index}>
                 <div className={styles.leader_cont}>
-                  <div className={styles.avatar}>2</div>
+                  <div className={styles.avatar}></div>
                   <div className={styles.user_title}>
                     <div className={styles.user_name}>
                       @{user.telegram_name}

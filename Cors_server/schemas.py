@@ -19,4 +19,8 @@ class UserProfile(BaseModel):
     jackpots_25: int
     jackpots_50: int
     jackpots_100: int
+    sparks: int
 
+class AddSparksRequest(BaseModel):
+    telegram_name: str
+    amount: int

@@ -3,9 +3,11 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from database import async_session, engine, Base
-import crud
+import crud, schemas
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+
+
 
 
 app = FastAPI(title="Telegram Roulette App")
@@ -15,8 +17,7 @@ origins = [
     "https://t.me",             
     "https://web.telegram.org", 
     "http://localhost:3000", 
-    "http://127.0.0.1:8000",
-    "http://localhost:5173"
+    "https://0e4f-91-246-41-75.ngrok-free.app"   
 ]
 
 app.add_middleware(
@@ -40,17 +41,22 @@ async def startup():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
+
+
 @app.post("/spin")
 async def spin(request: SpinRequest, db: AsyncSession = Depends(get_db)):
     if request.category not in [25, 50, 100]:
         raise HTTPException(status_code=400, detail="Invalid spin category")
     user = await crud.get_or_create_user(db, request.telegram_name)
     spin = await crud.perform_spin(db, user, request.category)
+    price = crud.get_prize_price(spin.prize, request.category)
     return {
         "telegram_name": user.telegram_name,
         "category": spin.category,
         "prize": spin.prize,
-        "is_jackpot": spin.is_jackpot
+        "is_jackpot": spin.is_jackpot,
+        "price": price,
+        "emoji": spin.emoji
     }
 
 @app.get("/leaderboard/{category}")
@@ -84,7 +90,36 @@ async def spin_history(telegram_name: str, db: AsyncSession = Depends(get_db)):
         {
             "category": spin.category,
             "prize": spin.prize,
-            "is_jackpot": spin.is_jackpot
+            "is_jackpot": spin.is_jackpot,
+            "price": crud.get_prize_price(spin.prize, spin.category),
+            "emoji": spin.emoji
         }
         for spin in spins
     ]
+
+
+@app.get("/profile/{telegram_name}")
+async def get_profile(telegram_name: str, db: AsyncSession = Depends(get_db)):
+    user = await crud.get_or_create_user(db, telegram_name)
+    return {
+        "telegram_name": user.telegram_name,
+        "spent_units": user.spent_units,
+        "spins_25": user.spins_25,
+        "spins_50": user.spins_50,
+        "spins_100": user.spins_100,
+        "jackpots_25": user.jackpots_25,
+        "jackpots_50": user.jackpots_50,
+        "jackpots_100": user.jackpots_100,
+        "total_jackpots": user.jackpots_25 + user.jackpots_50 + user.jackpots_100,
+        "sparks": user.sparks
+    }
+
+
+# тестовое
+@app.post("/add_sparks")
+async def add_sparks(data: schemas.AddSparksRequest, db: AsyncSession = Depends(get_db)):
+    try:
+        new_balance = await crud.add_sparks(db, data.telegram_name, data.amount)
+        return {"status": "success", "new_balance": new_balance}
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))

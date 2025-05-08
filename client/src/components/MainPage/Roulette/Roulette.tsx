@@ -42,7 +42,7 @@ export default function Roulette({
             <div key={index} className={styles.item}>
               {/* <img src="images/Prizes/prize.png" alt="Prize" />
                */}
-              🏆
+              {item.emoji}
               <div className={styles.item_cost}>
                 <img src="images/star.svg" alt="star" />
                 {item.price}
@@ -53,16 +53,16 @@ export default function Roulette({
             <div className={styles.item}>
               <img src="images/Prizes/prize.png" alt="Prize" />
               <div className={styles.item_cost}>
-                <img src="images/star.svg" alt="star" />
+                {/* <img src="images/star.svg" alt="star" />
+                 */}
+                {spinValue[0].emoji}
                 {spinValue[0].price}
               </div>
             </div>
           ) : null}
           {prizesList.map((item, index) => (
             <div key={index} className={styles.item}>
-              {/* <img src="images/Prizes/prize.png" alt="Prize" />
-               */}
-              🏆
+              {item.emoji}
               <div className={styles.item_cost}>
                 <img src="images/star.svg" alt="star" />
                 100 {item.name}

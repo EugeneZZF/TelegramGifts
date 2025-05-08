@@ -16,6 +16,7 @@ class User(Base):
     jackpots_25 = Column(Integer, default=0)
     jackpots_50 = Column(Integer, default=0)
     jackpots_100 = Column(Integer, default=0)
+    sparks = Column(Integer, default=0)
     spins = relationship("SpinHistory", back_populates="user")
 
 
@@ -27,5 +28,6 @@ class SpinHistory(Base):
     category = Column(Integer)  # 25, 50, 100
     prize = Column(String)
     is_jackpot = Column(Boolean)
+    emoji = Column(String)
 
     user = relationship("User", back_populates="spins")

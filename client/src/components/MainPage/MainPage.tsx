@@ -2,20 +2,33 @@ import { useEffect, useState } from "react";
 import Roulette from "./Roulette/Roulette";
 import styles from "./MainPage.module.css";
 import clsx from "clsx";
-import { getFake_prizes, getPrizes, Prize, PrizeSpin, Spin } from "../services";
+import {
+  getFake_prizes,
+  getPrizes,
+  Prize,
+  PrizeSpin,
+  Spin,
+  TelegramUser,
+} from "../services";
 import ToggleSwitch from "./ToggleSwitch";
 import SliderGifts from "./Roulette/SliderGifts";
+import { em } from "framer-motion/client";
 
 type Props = {
   category: number;
   handleCategoryChange: (newCategory: number) => void;
+  user: TelegramUser;
 };
 
-const MainPage: React.FC<Props> = ({ category, handleCategoryChange }) => {
-  const [prizesList, setPrizesList] = useState<Prize[]>([]);
+const MainPage: React.FC<Props> = ({
+  category,
+  handleCategoryChange,
+  user,
+}) => {
+  const [prizesList, setPrizesList] = useState<any[]>([]);
   const [isDemoMode, setIsDemoMode] = useState(false);
   const [isBloorActive, setIsBloorActive] = useState(false);
-  const [spinValue, setSpinValue] = useState<PrizeSpin[]>([]);
+  const [spinValue, setSpinValue] = useState<any[]>([]);
 
   const handleToggle = () => {
     setIsDemoMode(!isDemoMode);
@@ -36,6 +49,7 @@ const MainPage: React.FC<Props> = ({ category, handleCategoryChange }) => {
       img: prize.name,
       chance_percent: prize.chance_percent,
       price: prize.price,
+      emoji: prize.emoji,
     }));
 
     console.log("Formatted Prizes:", formattedPrizes);
@@ -71,8 +85,11 @@ const MainPage: React.FC<Props> = ({ category, handleCategoryChange }) => {
     const fake_prizes = getFake_prizes(category);
     let spinValuerF: PrizeSpin[] = [];
     if (!isDemoMode) {
-      const spinResult = await Spin(category);
-
+      const spinResult = await Spin(category, user.username);
+      if (spinResult === 400) {
+        alert("У вас недостаточно звезд для спина!");
+        return;
+      }
       spinValuerF = [
         {
           name: spinResult.prize,

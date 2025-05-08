@@ -1,9 +1,9 @@
-fastapi
-uvicorn
-sqlalchemy
-asyncpg
-httpx
-pydantic
-databases
-aiosqlite
-aiogram
+pip install fastapi
+pip install uvicorn
+pip install sqlalchemy
+pip install asyncpg
+pip install httpx
+pip install pydantic
+pip install database
+pip install aiosqlite
+pip install aiogram
